@@ -1,64 +1,22 @@
 ## Main Script File
-import string
-import random
 from MorseConverter import MorseConverter
+from PolluxCipher import PolluxCipher
 
-# MorseDecoder = MorseConverter()
-# morse_value = '....x.x.-..x.-..x---xx.--x---x.-.x.-..x-..'
-# text_value = 'hello world'
+def AssembleEncoder(plain_text):
+  Morse = MorseConverter()
+  Pollux = PolluxCipher()
+  morse_value = Morse.text_to_morse(plain_text)
+  pollux_value = Pollux.pollux_encode(morse_value)
+  group_by_five = Pollux.group_by_five(pollux_value)
+  print("input: " + plain_text)
+  print("output: " + group_by_five)
 
-# print("input: " + morse_value)
-# print("\n")
-# result = MorseDecoder.morse_to_text(morse_value)
-# print("output: " + result)
-# print("\n")
-# deresult = MorseDecoder.text_to_morse(text_value)
-# print("reverse: " + deresult)
-# print("\n")
+def AssembleDecoder(pollux_value):
+  Pollux = PolluxCipher()
+  pollux_value = pollux_value.replace(' ', '')
+  plain_text = Pollux.pollux_decode(pollux_value, Pollux.POLLUX_KEY_DICT)
+  print("input: " + pollux_value)
+  print("output: " + plain_text)
 
-# isSimilar = deresult == morse_value
-# print("isSimilar: " + isSimilar.__str__())
-
-POLLUX_KEY = 'x.--.x.-x.'
-
-POLLUX_KEY_DICT = {
-  'x': [1,6,9],
-  '.': [2,5,7,0],
-  '-': [3,4,8],
-}
-
-print(POLLUX_KEY)
-print("\n")
-print(POLLUX_KEY_DICT)
-
-MorseLib = MorseConverter()
-plain_text = 'hello world'
-sample_text = 'when one teaches two learn'
-morse_value = MorseLib.text_to_morse(sample_text)
-
-def pollux_encode(morse_value):
-  result = ''
-  for code in morse_value:
-    for key, value in POLLUX_KEY_DICT.items():
-      if code == key:
-        result += random.choice(value).__str__() + ''
-  return result
-
-def group_by_five(pollux_value):
-  result = ''
-  count = 0
-  for code in pollux_value:
-    if count == 5:
-      result += ' '
-      count = 0
-    result += code + ''
-    count += 1
-  return result
-
-print("\n")
-print("input: " + morse_value)
-print("\n")
-result = pollux_encode(morse_value)
-print("output: " + morse_value)
-print("output: " + group_by_five(result))
-
+AssembleEncoder('He Who Must Not Be Named')
+AssembleDecoder('27209 29108 81025 51884 61886 27412 20139 64264 44946 13022 95698 51581 34959 357')
