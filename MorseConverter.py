@@ -1,6 +1,9 @@
-## Morse Code Converter and Translator
+## Morse Code Module
+# MorseConverter Class File
 
 class MorseConverter: 
+  
+  ##  Morse Code Dictionary, Basis for Translation
   MORSE_CODE_DICT = {
     'A': '.-', 'B': '-...',
     'C': '-.-.', 'D': '-..', 'E': '.',
@@ -17,10 +20,12 @@ class MorseConverter:
     '0': '-----', ' ': 'xx', '': 'x'
   }
 
-  @staticmethod
+
+
+  ##  Translates Morse Code to Plain Text
+  @staticmethod # Converts Function to a Static Method
   def morse_to_text(morse_code):
     morse_code = morse_code.split('x')
-    # print(morse_code)
     text = ''
     for code in morse_code:
         for key, value in MorseConverter.MORSE_CODE_DICT.items():
@@ -30,7 +35,8 @@ class MorseConverter:
                 text += ' '
     return text
   
-  @staticmethod
+  ##  Translates Plain Text to Morse Code
+  @staticmethod # Converts Function to a Static Method
   def text_to_morse(text):
       morse_code = ''
       for char in text.upper():
