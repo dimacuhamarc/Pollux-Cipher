@@ -18,31 +18,23 @@ class MorseConverter:
   @staticmethod
   def morse_to_text(morse_code):
     morse_code = morse_code.split('x')
+    # print(morse_code)
     text = ''
     for code in morse_code:
         for key, value in MorseConverter.MORSE_CODE_DICT.items():
             if code == value:
                 text += key + ''
+            elif code == key:
+                text += ' '
     return text
-  
-  # @staticmethod
-  # def text_to_morse(text):
-  #     morse_code = ''
-  #     for char in text.upper():
-  #         if char in MorseConverter.MORSE_CODE_DICT.keys():
-  #             morse_code += MorseConverter.MORSE_CODE_DICT[char]
-  #         elif char :
-  #             morse_code += 'x'
-  #         else:
-  #             morse_code += 'xx'
-  #     return morse_code[:-1]  # Remove the trailing 'x'
   
   @staticmethod
   def text_to_morse(text):
       morse_code = ''
       for char in text.upper():
           if char in MorseConverter.MORSE_CODE_DICT.keys():
-              morse_code += MorseConverter.MORSE_CODE_DICT[char] + 'x'
-          elif char == ' ':
-              morse_code += 'xx'
+              if char != ' ':
+                  morse_code += MorseConverter.MORSE_CODE_DICT[char] + 'x'
+              else:
+                  morse_code += 'x'
       return morse_code[:-1].rstrip('x')
