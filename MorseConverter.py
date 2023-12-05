@@ -23,8 +23,6 @@ class MorseConverter:
         for key, value in MorseConverter.MORSE_CODE_DICT.items():
             if code == value:
                 text += key + ''
-            elif code == 'xx':
-                text += ' '
     return text
   
   # @staticmethod
